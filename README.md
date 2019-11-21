@@ -15,7 +15,9 @@ To use this package, you'd only need to import 3 classes:
     RTree
   </li>
 </ul>
-After importing those, you'd easily be able to encode/decode your data structures.
+The other classes held in this package are meant to be used internally and is not recommended to import any of them.
+The RTree class is meant to channel all possible user requests from this package. <br>
+You can easily be able to encode/decode your data structures with the 3 classes mentioned above.
 To do so, you can make use of the functions:
 <ul>
   <li>
@@ -52,7 +54,7 @@ To do so, you can make use of the functions:
   </p>
   </li>
 </ul>
-There's some other functions which you can find commented in the source code.<br>
+There's some other functions which you can find commented in the source code for the RTree class.<br>
 <h2>Data Structures</h2>
 <p>
 This package makes use of 2 important data structures and this are the ones you can use
