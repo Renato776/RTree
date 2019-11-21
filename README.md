@@ -18,7 +18,7 @@ To use this package, you'd only need to import 3 classes:
 The other classes held in this package are meant to be used internally and is not recommended to import any of them.
 The RTree class is meant to channel all possible user requests from this package. <br>
 You can easily be able to encode/decode your data structures with the 3 classes mentioned above.
-To do so, you can make use of the functions:
+To do so, you can make use of the following static functions held in RTree:
 <ul>
   <li>
     <h3>String basic_encode(String[][] info);</h3> 
