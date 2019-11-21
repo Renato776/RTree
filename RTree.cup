@@ -1,0 +1,44 @@
+package com.rTree; // Paquete
+import java_cup.runtime.*; 
+import java.util.*;
+
+/* TERMINALS */
+terminal LToken    
+LEFT_BRACKET,
+RIGHT_BRACKET,
+LEFT_BRACE,
+RIGHT_BRACE,
+DOUBLE_COLON,
+IDENTIFIER,
+PIPE,
+DATO;
+
+/* Non terminals */
+non terminal 			s_0;
+non terminal  GNode    nodo, data, nodoL, fieldL, field; 
+start with s_0; 
+
+/* The grammar rules */
+s_0 ::= nodo:e 
+		{: 
+		System.out.println("Finished parsing the RTree successfully!"); GNode.build(e);
+		:};
+
+nodo ::= LEFT_BRACE data:e1 nodoL:e2 RIGHT_BRACE {: GNode res = new GNode("node"); res.add(e1); res.add(e2); RESULT = res; :}
+		;
+
+data ::= LEFT_BRACKET fieldL:e RIGHT_BRACKET {: GNode res = new GNode("data"); res.add(e); RESULT = res; :}
+		| /*empty*/ {: RESULT = new GNode("data"); :}
+		;
+		
+fieldL ::= fieldL:e1 PIPE field:e2  {: e1.add(e2); RESULT = e1; :}
+			| field:e {: GNode res = new GNode("fields"); res.add(e); RESULT = res; :}
+			;
+			
+field ::= IDENTIFIER:i DOUBLE_COLON data:e {: GNode wrapper = new GNode("field"); wrapper.add(new GNode(i)); wrapper.add(e); RESULT = wrapper; :}
+		| IDENTIFIER:i DOUBLE_COLON nodo:e {: GNode wrapper = new GNode("field"); wrapper.add(new GNode(i)); wrapper.add(e); RESULT = wrapper; :}
+		| IDENTIFIER:i DOUBLE_COLON DATO:e {: GNode wrapper = new GNode("field"); wrapper.add(new GNode(i)); wrapper.add(new GNode(e)); RESULT = wrapper; :}
+		;
+nodoL ::= nodoL:e1 nodo:e2 {: e1.add(e2); RESULT = e1; :}
+		| /*empty*/ {: RESULT = new GNode("children"); :}
+		;
